@@ -6,3 +6,36 @@ WARNING: You must not remove and/or change any Blizzard's copyrights in any file
 
 World of Warcraft™, Blizzard Entertainment are trademarks or registered trademarks of Blizzard Entertainment, Inc. in the U.S. and/or other countries.
 The data contained herein is proprietary to Blizzard Entertainment, Inc. You are granted a limited license to make personal use of the information contained herein for non-commercial purposes only.
+
+установка(мало ли кто тоне найдет инфо)
+Код
+
+========================
+Как установить Оружейную
+========================
+
+СИСТЕМНЫЕ ТРЕБОВАНИЯ:
+1. Web-сервер Apache с подключенным модулем mod_rewrite
+2. PHP 5 (PHP 6 не поддерживается) с установленным и подключенным пакетом XMLWriter
+3. MySQL-сервер 5 или выше.
+
+ПОРЯДОК УСТАНОВКИ:
+1. Создайте новую базу сервера MySQL (`armory`, к примеру) с кодировкой utf8_general_ci;
+2. Распакуйте архив sql/wowarmory_release_r{ПОСЛЕДНЯЯ_РЕВИЗИЯ}.sql.7z в любую папку;
+3. Залейте распакованный wowarmory_release_r{ПОСЛЕДНЯЯ_РЕВИЗИЯ}.sql и wowamory_spell_release_r{ПОСЛЕДНЯЯ_РЕВИЗИЯ}.sql в базу `armory`
+4. Переименуйте файл includes/classes/configuration.php.default в configuration.php и отредактируйте его (см. комментарии).
+Внимание!
+Параметры подключения к базе персонажей находятся в:
+$ArmoryConfig['multiRealm'][1]['*_characters']
+Параметры подключения к игровой базе (мир) находятся в:
+$ArmoryConfig['multiRealm'][1]['*_mangos']
+Вы должны изменить значения этих параметров согласно вашим настройкам MySQL (пользователь/пароль/имя базы)
+5. Скачайте архив иконок из раздела "Downloads" на GitHub.com и распакуйте в папку "wow-icons/_images/"
+6. Распакуйте архив htaccess.zip и поместите распакованный файл .htaccess в корень сайта для правильной работы скриптов.
+7. Если в папке 'sql/updates' присутствуют обновления для базы (ревизии {ПОСЛЕДНЯЯ_РЕВИЗИЯ} и выше), вам будет необходимо так же залить их базу.
+8. Как установить и настроить 3D просмотрщик читайте в файле 3DViewer_info.txt
+9. Для работы страниц персонажа вам необходимо пропатчить ядро MaNGOS файлом tools/{СЕРВЕР}/wowarmory_patch.patch,
+а так же, базу персонажей файлом characters.sql (в папке патча).
+10. Если вы используете UNIX-систему, вам необходимо изменить права доступа к папке cache чтобы скрипт мог записывать кэшированные файлы.
+11. Если у вас запущено несколько реалмов с разными серверами (MaNGOS и Trinity Core):
+Откройте файл 'includes/classes/configuration.php' и измените параметр $ArmoryConfig['multiRealm'][{ИД_РЕАЛМА}]['type'] на 'trinity' или 'mangos'. 
